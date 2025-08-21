@@ -1,16 +1,16 @@
 {
   "name": "codementor-ai",
   "version": "1.0.0",
+  "description": "AI-powered Discord bot for competitive programming",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": ["discord", "bot", "ai", "competitive-programming"],
+  "author": "Your Name",
   "dependencies": {
-    "discord.js": "^14.22.0",
-    "dotenv": "^17.2.1"
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1"
   }
 }

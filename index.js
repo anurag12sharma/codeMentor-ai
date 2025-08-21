@@ -1,36 +1,51 @@
 // Load environment variables
 require('dotenv').config();
-const { Client, GatewayIntentBits } = require('discord.js');
 
-// Create Discord client
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const fs = require('fs');
+
+// Create Discord client with proper intents
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildMembers
     ]
 });
 
-// When bot comes online
-client.once('ready', () => {
-    console.log(`🤖 CodeMentor AI is online! Logged in as ${client.user.tag}`);
+// Create a collection to store commands
+client.commands = new Collection();
+
+// Load commands dynamically
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.name, command);
+    console.log(`✅ Loaded command: ${command.name}`);
+}
+
+// Load events dynamically  
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+for (const file of eventFiles) {
+    const event = require(`./events/${file}`);
+    if (event.once) {
+        client.once(event.name, (...args) => event.execute(...args, client));
+    } else {
+        client.on(event.name, (...args) => event.execute(...args, client));
+    }
+    console.log(`✅ Loaded event: ${event.name}`);
+}
+
+// Global error handling
+process.on('unhandledRejection', error => {
+    console.error('🚨 Unhandled promise rejection:', error);
 });
 
-// Listen for messages
-client.on('messageCreate', message => {
-    // Don't respond to other bots
-    if (message.author.bot) return;
-    
-    // Simple ping command
-    if (message.content.toLowerCase() === '!ping') {
-        message.reply('🏓 Pong! CodeMentor AI is working perfectly!');
-    }
-    
-    // Welcome message
-    if (message.content.toLowerCase() === '!hello') {
-        message.reply('👋 Hello! I am CodeMentor AI, your competitive programming assistant!');
-    }
+process.on('uncaughtException', error => {
+    console.error('🚨 Uncaught exception:', error);
+    process.exit(1);
 });
 
-// Start the bot
+// Login to Discord
 client.login(process.env.DISCORD_TOKEN);
