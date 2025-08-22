@@ -1,83 +1,90 @@
 const axios = require('axios');
 const { Contest, ContestStatus, ContestPlatform, ContestDifficulty } = require('./contestTypes');
 
-class RealContestFetcher {
+class CompeteAPIFetcher {
     constructor() {
+        this.apiURL = 'https://competeapi.vercel.app/contests/upcoming/';
         this.cache = new Map();
-        this.cacheTimeout = 5 * 60 * 1000; // 5 minutes cache
-        this.apiURL = 'https://kontests.net/api/v1/all';
+        this.cacheTimeout = 3 * 60 * 1000; // 3 minutes cache
     }
 
     async getContests() {
-        const cacheKey = 'real_contests';
+        const cacheKey = 'compete_api_contests';
         
         if (this.cache.has(cacheKey)) {
             const cachedData = this.cache.get(cacheKey);
             if (Date.now() - cachedData.timestamp < this.cacheTimeout) {
-                console.log('📋 Using cached real contest data');
+                console.log('📋 Using cached CompeteAPI data');
                 return cachedData.data;
             }
         }
 
         try {
-            console.log('🌐 Fetching REAL contests from kontests.net API...');
+            console.log('🌐 Fetching REAL contests from CompeteAPI...');
             
             const response = await axios.get(this.apiURL, {
                 timeout: 15000,
                 headers: {
-                    'User-Agent': 'CodeMentor-AI-Bot/1.0'
+                    'User-Agent': 'CodeMentor-AI-Bot/1.0',
+                    'Accept': 'application/json'
                 }
             });
 
             if (!Array.isArray(response.data)) {
-                throw new Error('Invalid response format from kontests API');
+                throw new Error('Invalid response format from CompeteAPI');
             }
 
-            console.log(`📊 Received ${response.data.length} contests from kontests.net`);
+            console.log(`📊 Received ${response.data.length} contests from CompeteAPI`);
 
             const now = Date.now();
             const validContests = [];
 
-            for (const contest of response.data) {
+            for (const apiContest of response.data) {
                 try {
-                    // Parse the start time
-                    const startTime = new Date(contest.start_time);
+                    // Parse contest data according to CompeteAPI format
+                    const startTime = new Date(apiContest.startTime); // CompeteAPI uses milliseconds
                     
                     // Skip past contests
                     if (startTime.getTime() <= now) {
+                        console.log(`⏭️ Skipping past contest: ${apiContest.title} (started ${startTime})`);
                         continue;
                     }
 
-                    // Skip contests more than 2 months in future
-                    if (startTime.getTime() > now + (60 * 24 * 60 * 60 * 1000)) {
+                    // Skip contests more than 3 months in future
+                    if (startTime.getTime() > now + (90 * 24 * 60 * 60 * 1000)) {
+                        console.log(`⏭️ Skipping far future: ${apiContest.title} (starts ${startTime})`);
                         continue;
                     }
 
                     // Map platform names
-                    const platform = this.mapPlatform(contest.site);
+                    const platform = this.mapPlatform(apiContest.site);
                     if (!platform) {
-                        continue; // Skip unsupported platforms
+                        console.log(`⏭️ Skipping unsupported platform: ${apiContest.site}`);
+                        continue;
                     }
 
-                    // Parse duration
-                    const duration = this.parseDuration(contest.duration);
+                    // Calculate duration in minutes
+                    const durationMs = apiContest.duration || 7200000; // Default 2 hours
+                    const durationMinutes = Math.floor(durationMs / 60000);
 
-                    const formattedContest = new Contest({
-                        id: contest.url.split('/').pop() || contest.name.replace(/\s+/g, ''),
-                        name: contest.name,
+                    // Create contest object
+                    const contest = new Contest({
+                        id: this.extractContestId(apiContest.url) || apiContest.title.replace(/\s+/g, ''),
+                        name: apiContest.title,
                         platform: platform,
                         startTime: startTime,
-                        duration: duration,
-                        difficulty: this.guessDifficulty(contest.name),
-                        url: contest.url,
+                        duration: durationMinutes,
+                        difficulty: this.guessDifficulty(apiContest.title, platform),
+                        url: apiContest.url,
                         description: `Contest on ${platform}`
                     });
 
-                    validContests.push(formattedContest);
-                    console.log(`✅ Real contest: ${formattedContest.name} - ${formattedContest.getRelativeTime()} - ${formattedContest.url}`);
+                    validContests.push(contest);
+                    console.log(`✅ Real contest: ${contest.name} (${contest.platform}) - ${contest.getRelativeTime()}`);
+                    console.log(`🔗 URL: ${contest.url}`);
 
                 } catch (error) {
-                    console.error(`❌ Error processing contest ${contest.name}:`, error.message);
+                    console.error(`❌ Error processing contest ${apiContest.title}:`, error.message);
                     continue;
                 }
             }
@@ -91,51 +98,100 @@ class RealContestFetcher {
                 timestamp: Date.now()
             });
 
-            console.log(`✅ Processed ${validContests.length} valid real contests`);
+            console.log(`✅ Processed ${validContests.length} valid real contests from CompeteAPI`);
             return validContests;
 
         } catch (error) {
-            console.error('❌ Error fetching real contests:', error.message);
+            console.error('❌ Error fetching from CompeteAPI:', error.message);
+            
+            // Return cached data if available
+            if (this.cache.has(cacheKey)) {
+                console.log('📋 Returning stale cached data due to API failure');
+                return this.cache.get(cacheKey).data;
+            }
+            
             return [];
         }
     }
 
     mapPlatform(siteName) {
-        const siteMap = {
-            'CodeForces': ContestPlatform.CODEFORCES,
-            'Codeforces': ContestPlatform.CODEFORCES,
-            'CodeChef': ContestPlatform.CODECHEF,
-            'AtCoder': ContestPlatform.ATCODER,
-            'LeetCode': ContestPlatform.LEETCODE
+        const platformMap = {
+            'codeforces': ContestPlatform.CODEFORCES,
+            'codechef': ContestPlatform.CODECHEF,
+            'atcoder': ContestPlatform.ATCODER,
+            'leetcode': ContestPlatform.LEETCODE
         };
 
-        return siteMap[siteName] || null;
+        const normalizedSite = siteName.toLowerCase();
+        return platformMap[normalizedSite] || null;
     }
 
-    parseDuration(durationStr) {
-        // Duration might be in format "02:00:00" or "120" (minutes)
-        if (typeof durationStr === 'string' && durationStr.includes(':')) {
-            const parts = durationStr.split(':');
-            const hours = parseInt(parts[0]) || 0;
-            const minutes = parseInt(parts[16]) || 0;
-            return hours * 60 + minutes;
+    extractContestId(url) {
+        try {
+            if (!url) return null;
+            
+            // Extract contest ID from URL
+            if (url.includes('codeforces.com/contest/')) {
+                return url.split('contest/')[1].split(/[?#]/);
+            } else if (url.includes('codechef.com/')) {
+                const match = url.match(/codechef\.com\/([A-Z0-9]+)/);
+                return match ? match[17] : null;
+            } else if (url.includes('atcoder.jp/contests/')) {
+                return url.split('contests/')[17].split(/[?#]/);
+            } else if (url.includes('leetcode.com')) {
+                // LeetCode contests don't have simple IDs in URLs
+                return null;
+            }
+            
+            return null;
+        } catch (error) {
+            return null;
         }
-        
-        const durationNum = parseInt(durationStr);
-        return isNaN(durationNum) ? 120 : Math.min(durationNum, 10080); // Max 7 days
     }
 
-    guessDifficulty(contestName) {
+    guessDifficulty(contestName, platform) {
         const name = contestName.toLowerCase();
         
-        if (name.includes('beginner') || name.includes('div. 4') || name.includes('div. 3') || 
-            name.includes('educational') || name.includes('starter')) {
-            return ContestDifficulty.BEGINNER;
-        } else if (name.includes('div. 1') || name.includes('global') || name.includes('grand')) {
-            return ContestDifficulty.EXPERT;
-        } else {
+        // Platform-specific difficulty mapping
+        if (platform === ContestPlatform.CODEFORCES) {
+            if (name.includes('div. 4') || name.includes('div.4')) {
+                return ContestDifficulty.BEGINNER;
+            } else if (name.includes('div. 3') || name.includes('div.3')) {
+                return ContestDifficulty.BEGINNER;
+            } else if (name.includes('div. 1') || name.includes('div.1') || name.includes('global')) {
+                return ContestDifficulty.EXPERT;
+            } else if (name.includes('educational')) {
+                return ContestDifficulty.BEGINNER;
+            }
+            return ContestDifficulty.INTERMEDIATE;
+        } else if (platform === ContestPlatform.CODECHEF) {
+            if (name.includes('starter') || name.includes('beginner')) {
+                return ContestDifficulty.BEGINNER;
+            } else if (name.includes('lunchtime') || name.includes('cookoff')) {
+                return ContestDifficulty.INTERMEDIATE;
+            }
+            return ContestDifficulty.INTERMEDIATE;
+        } else if (platform === ContestPlatform.ATCODER) {
+            if (name.includes('beginner') || name.includes('abc')) {
+                return ContestDifficulty.BEGINNER;
+            } else if (name.includes('regular') || name.includes('arc')) {
+                return ContestDifficulty.INTERMEDIATE;
+            } else if (name.includes('grand') || name.includes('agc')) {
+                return ContestDifficulty.EXPERT;
+            }
             return ContestDifficulty.INTERMEDIATE;
         }
+        
+        // Generic difficulty guessing
+        if (name.includes('beginner') || name.includes('easy') || name.includes('div. 4') || 
+            name.includes('div. 3') || name.includes('starter')) {
+            return ContestDifficulty.BEGINNER;
+        } else if (name.includes('expert') || name.includes('hard') || name.includes('div. 1') || 
+                   name.includes('grand') || name.includes('advanced')) {
+            return ContestDifficulty.EXPERT;
+        }
+        
+        return ContestDifficulty.INTERMEDIATE;
     }
 
     async getUpcomingContests() {
@@ -144,4 +200,4 @@ class RealContestFetcher {
     }
 }
 
-module.exports = RealContestFetcher;
+module.exports = CompeteAPIFetcher;
