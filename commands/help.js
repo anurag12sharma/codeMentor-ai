@@ -21,7 +21,7 @@ module.exports = {
         {
           name: "🏆 Contest Commands",
           value:
-            "`!contests` - View upcoming contests\n`!remind` - Set contest reminders",
+            "`!contests` - View upcoming contests\n`!remind-on` — Enable contest reminders in this channel\n`!remind-off` — Disable contest reminders for this channel",
           inline: false,
         },
         {

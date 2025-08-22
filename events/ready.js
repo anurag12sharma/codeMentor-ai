@@ -15,5 +15,7 @@ module.exports = {
             }],
             status: 'online'
         });
+
+        client.reminderSystem.start();
     }
 };

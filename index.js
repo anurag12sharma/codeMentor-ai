@@ -1,6 +1,7 @@
 // Load environment variables
 require('dotenv').config();
 
+const ReminderSystem = require('./utils/reminderSystem');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const fs = require('fs');
 
@@ -13,6 +14,11 @@ const client = new Client({
         GatewayIntentBits.GuildMembers
     ]
 });
+
+const reminderSystem = new ReminderSystem(client);
+// Attach to client for use in commands:
+client.reminderSystem = reminderSystem;
+
 
 // Create a collection to store commands
 client.commands = new Collection();
