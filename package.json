@@ -15,11 +15,14 @@
   ],
   "author": "Your Name",
   "dependencies": {
+    "@ai-sdk/google": "^2.0.8",
+    "ai": "^5.0.22",
     "axios": "^1.6.2",
-    "cheerio": "^1.0.0-rc.12", 
+    "cheerio": "^1.0.0-rc.12",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
     "moment": "^2.29.4",
-    "node-cron": "^3.0.3"
+    "node-cron": "^3.0.3",
+    "zod": "^3.25.76"
   }
 }
