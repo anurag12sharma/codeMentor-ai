@@ -20,9 +20,17 @@ module.exports = {
         },
         {
           name: "🏆 Contest Commands",
-          value:
-            "`!contests` - View upcoming contests\n`!remind-on` — Enable contest reminders in this channel\n`!remind-off` — Disable contest reminders for this channel\n`!calendar-auth` — Connect your Google Calendar\n`!addcal <contest>` — Add contest to your Google Calendar",
+          value:  '`!contests` - View upcoming contests\n' +
+                  '`!remind-on` — Enable contest reminders in this channel\n' +
+                  '`!remind-off` — Disable contest reminders for this channel\n',
           inline: false,
+        },
+        {
+          name: '📅 Calendar Integration',
+          value: '`!calendar-auth` - Setup calendar (dev only)\n' +
+                 '`!addcal <contest>` - Add to calendar (dev only)\n' +
+                 '**Note**: Calendar features available in development mode',
+          inline: false
         },
         {
           name: "📚 Study Commands",
