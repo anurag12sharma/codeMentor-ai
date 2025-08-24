@@ -1,0 +1,60 @@
+<% 
+let body = `
+<div class="container mt-5">
+    <h1 class="mb-4">All Upcoming Contests</h1>
+    
+    <div class="mb-4">
+        <label for="platformFilter" class="form-label fs-5">Filter by Platform:</label>
+        <select id="platformFilter" class="form-select w-auto d-inline-block">
+            ${platforms.map(p => `<option value="${p}">${p}</option>`).join('')}
+        </select>
+    </div>
+    
+    <div class="row" id="contestList">
+        ${contests && contests.length > 0 ? contests.map(contest => `
+        <div class="col-lg-4 col-md-6 mb-4 contest-parent">
+            <div class="card contest-card h-100">
+                <div class="card-body">
+                    <span class="badge bg-primary">${contest.platform}</span>
+                    <span class="badge ${contest.difficulty === 'Beginner' ? 'bg-success' : contest.difficulty === 'Expert' ? 'bg-danger' : 'bg-warning'}">${contest.difficulty}</span>
+                    <h5 class="card-title mt-2">${contest.name}</h5>
+                    <p class="card-text">
+                        <i class="bi bi-clock"></i>
+                        ${contest.getRelativeTime ? contest.getRelativeTime() : new Date(contest.startTime).toLocaleString()}
+                        <br>
+                        <i class="bi bi-hourglass-split"></i>
+                        ${contest.getFormattedDuration ? contest.getFormattedDuration() : (contest.duration ? Math.floor(contest.duration/60)+'h ' + (contest.duration%60)+'m' : '')}
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a href="${contest.url}" target="_blank" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-box-arrow-up-right"></i> View Contest
+                    </a>
+                </div>
+            </div>
+        </div>
+        `).join('') :
+        `<div class="col-12"><div class="alert alert-warning">No contests found at this time.</div></div>`
+        }
+    </div>
+</div>
+<script>
+    // Simple filter for platform
+    document.addEventListener('DOMContentLoaded', function() {
+        const filter = document.getElementById('platformFilter');
+        filter.addEventListener('change', function() {
+            const val = this.value;
+            document.querySelectorAll('.contest-parent').forEach(card => {
+                const badge = card.querySelector('.badge');
+                if (val === "All" || (badge && badge.textContent.trim() === val)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+`;
+%>
+<%- include('layout', { body: body }) %>

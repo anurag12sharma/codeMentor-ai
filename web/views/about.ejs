@@ -1,0 +1,83 @@
+<% 
+let body = `
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="text-center mb-5">
+                <i class="bi bi-robot text-primary" style="font-size: 4rem;"></i>
+                <h1 class="mt-3">About CodeMentor AI</h1>
+                <p class="lead">Your intelligent competitive programming companion</p>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3><i class="bi bi-lightbulb text-primary"></i> What is CodeMentor AI?</h3>
+                    <p>CodeMentor AI is an intelligent Discord bot designed specifically for competitive programmers. It combines real-time contest tracking, AI-powered study recommendations, and smart reminders to help you excel in competitive programming.</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5><i class="bi bi-calendar-event text-success"></i> Contest Tracking</h5>
+                            <p>Real-time tracking of contests from major platforms including Codeforces, CodeChef, AtCoder, and LeetCode.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5><i class="bi bi-brain text-info"></i> AI-Powered Recommendations</h5>
+                            <p>Get personalized study plans, programming tips, and contest recommendations powered by Google's Gemini AI.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5><i class="bi bi-bell text-warning"></i> Smart Reminders</h5>
+                            <p>Never miss a contest with automated reminders and calendar integration.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5><i class="bi bi-calendar-plus text-primary"></i> Calendar Integration</h5>
+                            <p>Sync contests and study sessions directly to your Google Calendar.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h3><i class="bi bi-code-slash text-primary"></i> Tech Stack</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><strong>Backend:</strong> Node.js, Express.js</li>
+                                <li><strong>Bot Framework:</strong> Discord.js</li>
+                                <li><strong>AI:</strong> Google Gemini AI</li>
+                                <li><strong>Authentication:</strong> Descope</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><strong>APIs:</strong> Google Calendar, Contest APIs</li>
+                                <li><strong>Frontend:</strong> Bootstrap 5, EJS</li>
+                                <li><strong>Deployment:</strong> Vercel/Railway</li>
+                                <li><strong>Database:</strong> File-based caching</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+`;
+%>
+
+<%- include('layout', { body: body }) %>

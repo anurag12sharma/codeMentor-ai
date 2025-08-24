@@ -1,0 +1,175 @@
+<% 
+let body = `
+<div class="hero-section bg-gradient-primary text-white py-5 mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-3">
+                    <i class="bi bi-robot"></i> CodeMentor AI Dashboard
+                </h1>
+                <p class="lead mb-4">
+                    Your intelligent competitive programming assistant powered by AI and real-time contest data.
+                </p>
+                <div class="d-flex gap-3">
+                    <span class="badge bg-success fs-6">
+                        <i class="bi bi-circle-fill"></i> Bot Status: ${botStats.status}
+                    </span>
+                    <span class="badge bg-info fs-6">
+                        <i class="bi bi-clock"></i> Uptime: ${botStats.uptime} minutes
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center">
+                <div class="bot-stats-card bg-white text-dark rounded-3 p-4 shadow">
+                    <h4 class="text-primary">Bot Statistics</h4>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="stat-number">${botStats.guilds}</div>
+                            <div class="stat-label">Servers</div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-number">${botStats.users}</div>
+                            <div class="stat-label">Users</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Contest Statistics -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="section-title">
+                <i class="bi bi-graph-up"></i> Contest Overview
+            </h2>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card stats-card text-center">
+                <div class="card-body">
+                    <i class="bi bi-calendar-event stats-icon text-primary"></i>
+                    <h3 class="card-title">${stats.total}</h3>
+                    <p class="card-text">Total Contests</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card stats-card text-center">
+                <div class="card-body">
+                    <i class="bi bi-calendar-plus stats-icon text-success"></i>
+                    <h3 class="card-title">${stats.upcoming}</h3>
+                    <p class="card-text">Upcoming</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card stats-card text-center">
+                <div class="card-body">
+                    <i class="bi bi-play-circle stats-icon text-danger"></i>
+                    <h3 class="card-title">${stats.running}</h3>
+                    <p class="card-text">Running Now</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card stats-card text-center">
+                <div class="card-body">
+                    <i class="bi bi-building stats-icon text-info"></i>
+                    <h3 class="card-title">${Object.keys(stats.platforms).length}</h3>
+                    <p class="card-text">Platforms</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Running Contests -->
+    ${runningContests.length > 0 ? `
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="section-title">
+                <i class="bi bi-broadcast text-danger"></i> Currently Running
+            </h2>
+        </div>
+        ${runningContests.map(contest => `
+        <div class="col-md-6 mb-3">
+            <div class="card contest-card border-danger">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h5 class="card-title">${contest.name}</h5>
+                            <p class="card-text">
+                                <span class="badge bg-danger">LIVE</span>
+                                <span class="badge bg-secondary">${contest.platform}</span>
+                            </p>
+                            <p class="card-text">
+                                <i class="bi bi-clock"></i> ${contest.getTimeUntilEnd() > 0 ? Math.floor(contest.getTimeUntilEnd() / 60) + ' hours left' : 'Ending soon'}
+                            </p>
+                        </div>
+                        <a href="${contest.url}" target="_blank" class="btn btn-danger btn-sm">
+                            <i class="bi bi-box-arrow-up-right"></i> Join
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `).join('')}
+    </div>
+    ` : ''}
+
+    <!-- Upcoming Contests -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="section-title">
+                <i class="bi bi-calendar-week"></i> Upcoming Contests
+            </h2>
+        </div>
+        ${contests.slice(0, 6).map((contest, index) => `
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card contest-card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge bg-primary">${contest.platform}</span>
+                        <span class="badge ${contest.difficulty === 'Beginner' ? 'bg-success' : contest.difficulty === 'Expert' ? 'bg-danger' : 'bg-warning'}">${contest.difficulty}</span>
+                    </div>
+                    <h5 class="card-title">${contest.name}</h5>
+                    <p class="card-text">
+                        <i class="bi bi-clock"></i> ${contest.getRelativeTime()}<br>
+                        <i class="bi bi-hourglass-split"></i> ${contest.getFormattedDuration()}
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a href="${contest.url}" target="_blank" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-box-arrow-up-right"></i> View Contest
+                    </a>
+                </div>
+            </div>
+        </div>
+        `).join('')}
+    </div>
+
+    <!-- Platform Breakdown -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="section-title">
+                <i class="bi bi-pie-chart"></i> Platform Distribution
+            </h2>
+        </div>
+        ${Object.entries(stats.platforms).map(([platform, count]) => `
+        <div class="col-md-3 mb-3">
+            <div class="card platform-card">
+                <div class="card-body text-center">
+                    <h4>${platform}</h4>
+                    <div class="platform-count">${count}</div>
+                    <small class="text-muted">contests</small>
+                </div>
+            </div>
+        </div>
+        `).join('')}
+    </div>
+</div>
+`;
+%>
+
+<%- include('layout', { body: body }) %>
