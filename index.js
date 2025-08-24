@@ -4,6 +4,7 @@ require('dotenv').config();
 const ReminderSystem = require('./utils/reminderSystem');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const fs = require('fs');
+const { setBotClient } = require('./web/server');
 
 // Create Discord client with proper intents
 const client = new Client({

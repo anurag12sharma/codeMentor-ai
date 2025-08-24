@@ -73,7 +73,7 @@ class AIStudyPlanner {
 5. Include time management advice
 6. Make recommendations realistic and achievable
 
-Focus on competitive programming platforms like Codeforces, CodeChef, AtCoder, and LeetCode.
+Focus on competitive programming platforms like Codeforces, CodeChef, HackerEarth, and LeetCode.
 Consider their current level and gradually increase difficulty.`;
     }
 
@@ -106,7 +106,7 @@ Include:
 4. Common mistakes to avoid
 5. Recommended problem difficulty progression
 
-Keep it concise but actionable for Discord. Focus on competitive programming contests like Codeforces, CodeChef, AtCoder.`;
+Keep it concise but actionable for Discord. Focus on competitive programming contests like Codeforces, CodeChef, HackerEarth.`;
 
         try {
             const tip = await this.aiService.generateText(prompt, {

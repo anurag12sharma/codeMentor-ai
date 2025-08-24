@@ -17,5 +17,8 @@ module.exports = {
         });
 
         client.reminderSystem.start();
+        const { setBotClient } = require('../web/server');
+        setBotClient(client);
+        console.log('🌐 Web dashboard connected to bot');
     }
 };

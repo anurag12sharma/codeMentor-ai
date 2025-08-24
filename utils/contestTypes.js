@@ -9,7 +9,7 @@ const ContestStatus = {
 const ContestPlatform = {
     CODEFORCES: 'Codeforces',
     CODECHEF: 'CodeChef',
-    ATCODER: 'AtCoder',
+    HACKEREARTH: 'HackerEarth',
     LEETCODE: 'LeetCode'
 };
 

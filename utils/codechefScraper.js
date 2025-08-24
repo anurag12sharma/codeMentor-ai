@@ -118,7 +118,7 @@ class CompeteAPIFetcher {
         const platformMap = {
             'codeforces': ContestPlatform.CODEFORCES,
             'codechef': ContestPlatform.CODECHEF,
-            'atcoder': ContestPlatform.ATCODER,
+            'hackerearth': ContestPlatform.HACKEREARTH,
             'leetcode': ContestPlatform.LEETCODE
         };
 
@@ -136,10 +136,13 @@ class CompeteAPIFetcher {
             } else if (url.includes('codechef.com/')) {
                 const match = url.match(/codechef\.com\/([A-Z0-9]+)/);
                 return match ? match[17] : null;
-            } else if (url.includes('atcoder.jp/contests/')) {
-                return url.split('contests/')[17].split(/[?#]/);
+            } else if (url.includes('hackerearth.com/challenge/')) {
+                const match = url.match(/hackerearth\.com\/challenge\/([^\/]+)/);
+                return match ? match[1] : null;
+            } else if (url.includes('hackerearth.com/challenges/')) {
+                const match = url.match(/hackerearth\.com\/challenges\/([^\/]+)/);
+                return match ? match[1] : null;
             } else if (url.includes('leetcode.com')) {
-                // LeetCode contests don't have simple IDs in URLs
                 return null;
             }
             
@@ -171,27 +174,30 @@ class CompeteAPIFetcher {
                 return ContestDifficulty.INTERMEDIATE;
             }
             return ContestDifficulty.INTERMEDIATE;
-        } else if (platform === ContestPlatform.ATCODER) {
-            if (name.includes('beginner') || name.includes('abc')) {
+        } else if (platform === ContestPlatform.HACKEREARTH) {
+            if (name.includes('easy') || name.includes('beginner') || name.includes('school')) {
                 return ContestDifficulty.BEGINNER;
-            } else if (name.includes('regular') || name.includes('arc')) {
-                return ContestDifficulty.INTERMEDIATE;
-            } else if (name.includes('grand') || name.includes('agc')) {
+            } else if (name.includes('hard') || name.includes('expert') || name.includes('advanced')) {
                 return ContestDifficulty.EXPERT;
             }
             return ContestDifficulty.INTERMEDIATE;
         }
-        
-        // Generic difficulty guessing
-        if (name.includes('beginner') || name.includes('easy') || name.includes('div. 4') || 
-            name.includes('div. 3') || name.includes('starter')) {
-            return ContestDifficulty.BEGINNER;
-        } else if (name.includes('expert') || name.includes('hard') || name.includes('div. 1') || 
-                   name.includes('grand') || name.includes('advanced')) {
-            return ContestDifficulty.EXPERT;
+    }
+
+    formatHackerEarthURL(contestId) {
+        return `https://www.hackerearth.com/challenge/${contestId}/`;
+    }
+
+    detectHackerEarthType(contestName) {
+        const name = contestName.toLowerCase();
+        if (name.includes('hiring') || name.includes('recruitment')) {
+            return 'Hiring Challenge';
+        } else if (name.includes('circuit') || name.includes('monthly')) {
+            return 'Monthly Circuit';
+        } else if (name.includes('hackathon')) {
+            return 'Hackathon';
         }
-        
-        return ContestDifficulty.INTERMEDIATE;
+        return 'Contest';
     }
 
     async getUpcomingContests() {
