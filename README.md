@@ -5,7 +5,7 @@
 ![CodeMentor AI Banner](https://img.shields.io/badge/CodeMentor%20AI-Competitive%20Programming%20Bot-blue?style=for-the-badge&logo=discord)
 
 [![Live Bot](https://img.shields.io/badge/🤖%20Live%20Bot-Online-success?style=for-the-badge)](https://your-railway-url.railway.app)
-[![Web Dashboard](https://img.shields.io/badge/🌐%20Dashboard-Live-blue?style=for-the-badge)](https://codementor-ai-dashboard-knak6afxv-anurag12sharmas-projects.vercel.app)
+[![Web Dashboard](https://img.shields.io/badge/🌐%20Dashboard-Live-blue?style=for-the-badge)](https://codementor-ai-dashboard-anurag12sharmas-projects.vercel.app)
 [![Invite the Bot](https://img.shields.io/badge/💬%20Invite%20to%20Discord%20Server-5865F2.svg?style=for-the-badge&logo=discord)](https://discord.com/oauth2/authorize?client_id=1408136900438528000&scope=bot+applications.commands&permissions=268954752)
 [![Hackathon](https://img.shields.io/badge/🏆%20Global%20MCP-Hackathon%202025-gold?style=for-the-badge)](https://hackathon.example.com)
 
