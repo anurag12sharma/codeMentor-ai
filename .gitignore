@@ -1,4 +1,10 @@
 node_modules/
 .env
+.env.local
 google-credentials.json
-token.json
+token.json\
+*.log
+.DS_Store
+.vscode/
+coverage/
+dist/

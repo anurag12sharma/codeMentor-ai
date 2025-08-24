@@ -3,31 +3,43 @@
   "version": "1.0.0",
   "description": "AI-powered Discord bot for competitive programming",
   "main": "index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "start": "node index.js",
-    "dev": "node index.js"
+    "dev": "nodemon index.js",
+    "web": "node web/server.js",
+    "build": "echo 'No build step required'",
+    "health-check": "node scripts/healthCheck.js"
   },
-  "keywords": [
-    "discord",
-    "bot",
-    "ai",
-    "competitive-programming"
-  ],
-  "author": "Your Name",
   "dependencies": {
-    "@ai-sdk/google": "^2.0.8",
-    "ai": "^5.0.22",
-    "axios": "^1.6.2",
-    "cheerio": "^1.0.0-rc.12",
-    "cors": "^2.8.5",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
-    "ejs": "^3.1.10",
-    "express": "^5.1.0",
-    "googleapis": "^157.0.0",
-    "helmet": "^8.1.0",
-    "moment": "^2.29.4",
+    "express": "^4.18.2",
+    "ejs": "^3.1.9",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12",
     "node-cron": "^3.0.3",
-    "zod": "^3.25.76"
-  }
+    "moment": "^2.29.4",
+    "googleapis": "^120.0.0",
+    "@descope/node-sdk": "^1.8.0",
+    "ai": "^3.0.0",
+    "@ai-sdk/google": "^0.0.21",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "keywords": [
+    "discord-bot",
+    "competitive-programming",
+    "ai",
+    "hackathon",
+    "mcp"
+  ],
+  "author": "Anurag Sharma",
+  "license": "MIT"
 }
