@@ -176,5 +176,4 @@ MIT License
 **⭐ Star this repo if you found it helpful! [https://github.com/anurag12sharma/codeMentor-ai]**
 
 ---
- 
-Feel free to request any custom sections or additional badges! 🚀
+
