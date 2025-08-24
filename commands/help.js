@@ -44,6 +44,13 @@ module.exports = {
             "`!recommend` - AI contest recommendations",
           inline: false,
         },
+        {
+          name: '🔐 Security Features (Hackathon)',
+          value: '`!auth-status` - Check Descope authentication\n' +
+                 '`!security` - View security status\n' +
+                 '**All external APIs secured with Descope Outbound Apps**',
+          inline: false
+      }
       ])
       .setFooter({
         text: `Requested by ${message.author.username}`,
