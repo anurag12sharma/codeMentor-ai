@@ -150,14 +150,14 @@ let body = `
     </div>
 
     <!-- Platform Breakdown -->
-    <div class="row mb-5">
+    <div class="d-flex row mb-5 justify-content-between">
         <div class="col-12">
             <h2 class="section-title">
                 <i class="bi bi-pie-chart"></i> Platform Distribution
             </h2>
         </div>
         ${Object.entries(stats.platforms).map(([platform, count]) => `
-        <div class="col-md-3 mb-3">
+        <div class="col-md-4 mb-3" role="button">
             <div class="card platform-card">
                 <div class="card-body text-center">
                     <h4>${platform}</h4>

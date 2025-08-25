@@ -37,7 +37,7 @@ module.exports = {
                     }
                 ])
                 .setFooter({ 
-                    text: 'Required for Global MCP Hackathon - Descope Outbound Apps Theme',
+                    text: 'Built for Global MCP Hackathon',
                     iconURL: client.user.displayAvatarURL()
                 })
                 .setTimestamp();
