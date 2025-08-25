@@ -40,6 +40,23 @@
 
 ---
 
+## 📸 Screenshots & GIFs
+
+**🌐 Web Dashboard**
+> <img width="1940" height="2274" alt="image" src="https://github.com/user-attachments/assets/888efbd4-166e-4f0f-92cb-0d14c185e233" />
+
+**🤖 Bot Screenshots**
+> <img width="1488" height="1266" alt="image" src="https://github.com/user-attachments/assets/436a84bc-90cf-4027-a139-5d0c15f841e5" />
+
+> <img width="1354" height="1658" alt="image" src="https://github.com/user-attachments/assets/82ae79cf-b1d7-4ef8-8c12-cba0208eb41f" />
+
+> <img width="1186" height="962" alt="image" src="https://github.com/user-attachments/assets/066b69db-2c18-4f58-ae77-9f4f4381d6ec" />
+
+
+</details>
+
+---
+
 ## 🛠️ Tech Stack
 
 - **Backend:** Node.js, Express.js
@@ -48,7 +65,7 @@
 - **Authentication:** Descope Node SDK
 - **Dashboard:** Express, EJS, Bootstrap, Vercel hosting
 - **Integrations:** CompeteAPI, Google Calendar API
-- **Deployment:** Railway (bot), Vercel (dashboard)
+- **Deployment:** Railway
 - **Monitoring:** UptimeRobot
 
 ---
@@ -118,26 +135,10 @@ graph TB
 
 ## 🌐 Live Links
 
-| Service | URL | Status |
-|---------|-----|--------|
-| Discord Bot | [Railway App](https://your-railway-url.railway.app/) | 🟢 Online |
-| Web Dashboard | [Vercel Web](https://codementor-ai-dashboard.vercel.app/) | 🟢 Online |
-| Invite the Bot  | [Invite Link](https://discord.com/oauth2/authorize?client_id=1408136900438528000&scope=bot+applications.commands&permissions=268954752)        | 🔗          |
-
----
-
-## 📸 Screenshots & GIFs
-
-<details>
-<summary>Click to expand</summary>
-
-![Bot Screenshot](https://via.placeholder.com/900x300/5865F2/ffffff?text=Discord+Bot+In+Action)
-> **Note:** Replace this placeholder with an actual bot screenshot showing the commands in action.
-
-![Dashboard GIF](https://via.placeholder.com/900x300/000000/ffffff?text=Live+Dashboard+GIF+Coming+Soon)
-> **Note:** Replace this placeholder with a live dashboard GIF showing the real-time features.
-
-</details>
+| Service | Status |
+|---------|--------|
+| [Invite Discord Bot](https://discord.com/oauth2/authorize?client_id=1408136900438528000&scope=bot+applications.commands&permissions=268954752) | 🟢 Online |
+| [Web Dashboard](https://codementor-ai-production.up.railway.app/) | 🟢 Online |
 
 ---
 
