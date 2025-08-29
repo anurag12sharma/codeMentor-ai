@@ -1,4 +1,4 @@
-# 🤖 CodeMentorAI - The Ultimate Competitive Programming Assistant
+# 🤖 CodeMentorAI - Your Ultimate Competitive Programming Sidekick
 
 <div align="center">
 
@@ -6,37 +6,73 @@
 
 [![Live Bot](https://img.shields.io/badge/🤖%20Live%20Bot-Online-success?style=for-the-badge)](https://your-railway-url.railway.app/) [![Web Dashboard](https://img.shields.io/badge/🌐%20Dashboard-Live-blue?style=for-the-badge)](https://codementor-ai-production.up.railway.app/) [![Invite the Bot](https://img.shields.io/badge/💬%20Invite%20to%20Discord%20Server-5865F2.svg?style=for-the-badge&logo=discord)](https://discord.com/oauth2/authorize?client_id=1408136900438528000&scope=bot+applications.commands&permissions=268954752) [![Hackathon](https://img.shields.io/badge/🏆%20Global%20MCP-Hackathon%202025-gold?style=for-the-badge)](https://hackathon.example.com/)
 
-**AI-powered Discord bot to supercharge your competitive programming journey: stay up-to-date with contests, get personalized study recommendations, and never miss a coding challenge!**
+**AI-powered Discord bot that keeps you contest-ready: track events, get smart study plans, and never miss a challenge again!**
 
 </div>
+
+---
+
+## 🎯 Project Overview
+
+Competitive programming is fun, but tracking everything isn’t..
+
+* 🚨 **The Problem** – Programmers spend too much time juggling multiple platforms just to track contests.
+* 💡 **The Solution** – A single AI-powered Discord bot that tracks the contests for them, recommends contests and sends timely reminders.
+* 📈 **The Impact** – Saves \~15 minutes per day and boosts contest participation by up to **40%**.
+
+---
+
+## 🏆 Hackathon Info
+
+* **Team Name:** `anurag12sharma`
+* **Members:**
+  1. Anurag Sharma
+* **Hackathon Theme:** Theme 1
+* **Challenge Addressed:** Competitive programmers often lose valuable time juggling multiple sites to track upcoming contests, leading to missed opportunities and reduced participation.
+* **What I Built:** **CodeMentor AI** – an AI-powered Discord bot that:
+  * Tracks contests across platforms
+  * Suggests contests tailored to your skill level
+  * Creates personalized study plans
+  * Sends automated reminders so you never miss a challenge
+* **How to Run:**
+  👉 Follow the [Quick Start](#-quick-start) guide to set up locally.
+* **Tech Stack:**
+  * **Required Tech:** Discord.js, Google Gemini API, Descope SDK
+  * **Others:** Node.js, Express, MongoDB, EJS, Bootstrap, CompeteAPI, Railway, Vercel
+* **Demo Video:** [Watch Here]()
+* **With More Time, I’d Add:**
+  * Weekly contests + leaderboards
+  * In-Bot Practice Mode, coding challenges with AI-suggested problems tailored to each user’s progress.
+  * AI-driven personalized mock interviews
+  * Gamified rewards system for consistent practice
 
 ---
 
 ## ✨ Features
 
 ### 🏆 Real-Time Contest Tracking
-- **Multi-Platform:** Codeforces, CodeChef, HackerEarth, LeetCode
-- **Live Updates:** Auto-refresh with the latest contests and stats
-- **Contest Search:** Filter by platform, keyword, or difficulty
-- **Running Contests:** Track currently active competitions
+- Multiplatform: Codeforces, CodeChef, HackerEarth, LeetCode
+- Auto refreshing live updates
+- Contest search by platform, keyword, or difficulty
+- Active contests are displayed instantly
 
 ### 🧠 AI-Powered Recommendations
-- **Personalized Study Plans:** AI-suggested study paths
-- **Smart Contest Suggestions:** Tailored for your skill level
-- **Programming Tips:** Instant context-aware advice
+- Study Plans Personalised by AI
+- Smart Suggestions: Contests matched to your level
+- Instant Tips: Context-aware programming advice
 
 ### 🔔 Smart Reminders
-- **Never Miss a Contest:** Automated notifications before start
-- **Customizable Alerts:** Enable/disable reminders with simple commands
+- Never miss a contest with automated notifications
+- Fully customizable: enable/disable with simple commands
 
 ### 🌐 Modern Web Dashboard
-- **Live Stats:** See upcoming & running contests in real time
-- **Beautiful UI:** Built with EJS, Bootstrap, fully responsive
-- **Bot Analytics:** Live metrics for users, servers, uptime
+- Real-time stats for upcoming & live contests
+- Responsive UI built with EJS + Bootstrap
+- Bot analytics: users, servers, uptime
 
 ### 🔐 Secure by Design
-- **Descope Outbound Apps:** Secure authentication for all API calls
-- **API Protection:** Rate limiting and robust error handling
+- Descope-powered secure authentication
+- Rate limiting & error handling for safe API calls
 
 ---
 
@@ -63,7 +99,7 @@
 - **Bot Framework:** Discord.js
 - **AI/ML:** Google Gemini API (LLM)
 - **Authentication:** Descope Node SDK
-- **Dashboard:** Express, EJS, Bootstrap, Vercel hosting
+- **Dashboard:** Express, EJS, Bootstrap, Railway hosting
 - **Integrations:** CompeteAPI, Google Calendar API
 - **Deployment:** Railway
 - **Monitoring:** UptimeRobot
@@ -73,7 +109,7 @@
 ## 🚀 Quick Start
 
 ```bash
-# 1. Clone the repository
+# 1. Clone
 git clone https://github.com/your-username/codementor-ai.git
 cd codementor-ai
 
@@ -82,7 +118,7 @@ npm install
 
 # 3. Configure environment variables
 cp .env.example .env
-# Edit .env and fill in your Discord token, AI API key, etc.
+# Add Discord token, AI key, etc.
 
 # 4. Start the bot
 npm start
@@ -95,23 +131,23 @@ node server.js
 
 ---
 
-## 💬 Commands & Usage
+## 💬 Commands
 
 ```bash
-# Contest Commands
-!contests          # Upcoming contests
-!contests cf       # Codeforces only
-!running           # Running/ongoing contests
-!search string     # Search contests
+# Contests
+!contests                → Upcoming contests  
+!contests cf             → Codeforces only
+!running                 → Ongoing contests
+!search string           → Search by keyword 
 
-# AI Commands
-!schedule beginner      # Get a study plan
-!tip "data structures" # Get AI programming tip
+# AI 
+!schedule beginner       → AI-generated study plan
+!tip "topic"             → Quick programming tip 
 
 # Settings Commands
-!remind-on          # Enable reminders
-!remind-off         # Disable reminders
-!help               # Full command list
+!remind-on               → Enable reminders 
+!remind-off              → Disable reminders
+!help                    → Full command list 
 ```
 
 ---
@@ -128,7 +164,7 @@ graph TB
     F --> G[Database]
     A --> G
     H[Railway Deployment] --> A
-    I[Vercel Deployment] --> E
+    I[Railway Deployment] --> E
 ```
 
 ---
@@ -144,9 +180,9 @@ graph TB
 
 ## ⚡ Monitoring & Security
 
-- **Descope Outbound Apps:** All external API usage is securely authenticated and monitored.
-- **Health Check:** `/health` endpoint for deployment monitoring.
-- **UptimeRobot:** 24/7 monitoring.
+- ✅ All APIs secured with Descope
+- 🔍 Health check endpoint /health
+- 📡 24/7 uptime tracking with UptimeRobot
 
 ---
 
@@ -162,28 +198,15 @@ Built with ❤️ by Anurag Sharma for the **Global MCP Hackathon 2025**.
 
 ## 🤝 Contributing
 
-We welcome contributions from the community! Here's how you can help make CodeMentorAI better:
+Contributions welcome! Ways you can help:
 
-### Getting Started
-1. **Fork the repository** and clone it locally
-2. **Create a feature branch:** `git checkout -b feature/your-feature-name`
-3. **Make your changes** and test them thoroughly
-4. **Commit your changes:** `git commit -m "Add your descriptive commit message"`
-5. **Push to your fork:** `git push origin feature/your-feature-name`
-6. **Create a Pull Request** with a clear description of your changes
+- Bug fixes & optimizations
+- New features
+- Better docs & examples
+- UI/UX improvements
+- Test coverage
 
-### What We're Looking For
-- 🐛 Bug fixes and performance improvements
-- ✨ New features that enhance the competitive programming experience
-- 📚 Documentation improvements and examples
-- 🎨 UI/UX enhancements for the web dashboard
-- 🧪 Test coverage improvements
-
-### Code of Conduct
-Please be respectful and constructive in all interactions. We're building an inclusive community where everyone can learn and contribute.
-
-### Questions & Discussions
-Have ideas or need help? Join our [GitHub Discussions](https://github.com/anurag12sharma/codeMentor-ai/discussions) to connect with other contributors and share your thoughts!
+👉 Start with a fork → create a feature branch → open a PR.
 
 ---
 
@@ -191,36 +214,21 @@ Have ideas or need help? Join our [GitHub Discussions](https://github.com/anurag
 
 ### Common Setup Issues
 
-**Q: The bot isn't responding to commands**
-- Ensure your Discord bot token is correct in `.env`
-- Check that the bot has proper permissions in your server
-- Verify the bot is online in the Discord Developer Portal
+**Q: Bot not responding?**
+- Check Discord token in .env
+- Ensure bot has correct permissions
 
-**Q: Contest data isn't loading**
-- Check your internet connection
-- Verify that external APIs (CompeteAPI) are accessible
-- Try the `!contests` command to refresh the data
+**Q: Contest data missing?**
+- APIs might be down → try !contests to refresh
 
-**Q: AI features aren't working**
-- Make sure your Google Gemini API key is valid and has quota
-- Check the API key permissions in Google Cloud Console
-- Ensure the bot has internet access for API calls
+**Q: AI not working?**
+- Verify Google Gemini API key + quota
 
-**Q: Web dashboard shows errors**
-- Verify all environment variables are set correctly
-- Check that the dashboard URL matches your deployment
-- Ensure database connection is working if using persistent storage
+**Q: Dashboard issues?**
+- Double-check env vars & DB connection
 
-**Q: How do I invite the bot to my server?**
-- Use our [official invite link](https://discord.com/oauth2/authorize?client_id=1408136900438528000&scope=bot+applications.commands&permissions=268954752)
-- Make sure you have "Manage Server" permissions
-- The bot needs message and embed permissions to function properly
-
----
-
-## 📄 License
-
-MIT License
+**Q: How do I invite the bot?**
+- Use this [link](https://discord.com/oauth2/authorize?client_id=1408136900438528000&scope=bot+applications.commands&permissions=268954752)
 
 ---
 
@@ -230,11 +238,11 @@ MIT License
 - Google Gemini AI
 - Descope
 - CompeteAPI
-- Railway, Vercel
+- Railway
 - All hackathon judges and contributors!
 
 ---
 
-**⭐ Star this repo if you found it helpful! [https://github.com/anurag12sharma/codeMentor-ai]**
+**⭐ Star this repo if CodeMentor AI helped you!**
 
 ---
