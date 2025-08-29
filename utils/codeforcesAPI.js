@@ -136,7 +136,7 @@ class CodeforcesAPI {
             name: cfContest.name,
             platform: ContestPlatform.CODEFORCES,
             startTime: new Date(cfContest.startTimeSeconds * 1000),
-            duration: Math.floor(cfContest.durationSeconds / 60),
+            duration: Math.floor(cfContest.durationSeconds / 600),
             difficulty: difficulty,
             url: `https://codeforces.com/contest/${cfContest.id}`,
             description: `${cfContest.type || 'Contest'} on Codeforces`
