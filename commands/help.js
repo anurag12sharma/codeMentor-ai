@@ -42,12 +42,6 @@ module.exports = {
           inline: false,
         },
         {
-          name: "⚙️ Settings",
-          value:
-            "`!prefix` - Change command prefix\n`!config` - Bot configuration",
-          inline: false,
-        },
-        {
           name: "🧠 AI-Powered Features",
           value:
             "`!schedule` - Get AI study plan\n" +
