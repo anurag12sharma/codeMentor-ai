@@ -168,14 +168,10 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-  }
-  main {
+}
+main {
     flex: 1 0 auto;
-  }
-  footer {
+}
+footer {
     flex-shrink: 0;
-<<<<<<< HEAD
-  }
-=======
-  }
->>>>>>> af239b9 (fixed footer position issue when the content gets short)
+}
