@@ -79,14 +79,24 @@ Competitive programming is fun, but tracking everything isn’t..
 ## 📸 Screenshots & GIFs
 
 **🌐 Web Dashboard**
-> <img width="1940" height="2274" alt="image" src="https://github.com/user-attachments/assets/888efbd4-166e-4f0f-92cb-0d14c185e233" />
+> <img width="1940" height="3106" alt="image" src="https://github.com/user-attachments/assets/205d5924-4278-4e4c-adbd-6dc942a3a93a" />
+
 
 **🤖 Bot Screenshots**
-> <img width="1488" height="1266" alt="image" src="https://github.com/user-attachments/assets/436a84bc-90cf-4027-a139-5d0c15f841e5" />
+> <img width="1198" height="1078" alt="image" src="https://github.com/user-attachments/assets/8cd8f357-c850-41e6-84e3-0999d552ef6b" />
 
-> <img width="1354" height="1658" alt="image" src="https://github.com/user-attachments/assets/82ae79cf-b1d7-4ef8-8c12-cba0208eb41f" />
+> <img width="1298" height="1622" alt="image" src="https://github.com/user-attachments/assets/b30151ea-7307-41dc-af33-9a2c90c7f4a3" />
 
-> <img width="1186" height="962" alt="image" src="https://github.com/user-attachments/assets/066b69db-2c18-4f58-ae77-9f4f4381d6ec" />
+> <img width="822" height="1450" alt="image" src="https://github.com/user-attachments/assets/7c0e366e-64b9-43da-bb4b-41e66069b3b0" />
+
+> <img width="1464" height="1556" alt="image" src="https://github.com/user-attachments/assets/59fa5788-0f6b-4237-9f07-c2144156b651" />
+
+> <img width="1166" height="928" alt="image" src="https://github.com/user-attachments/assets/4d231e48-895d-4215-8357-ccdd861e603b" />
+
+> <img width="1258" height="1054" alt="image" src="https://github.com/user-attachments/assets/e52b94f7-3e71-42db-b84a-c084d5c2af61" />
+
+
+
 
 
 </details>
