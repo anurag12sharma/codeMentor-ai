@@ -174,4 +174,8 @@ body {
   }
   footer {
     flex-shrink: 0;
+<<<<<<< HEAD
   }
+=======
+  }
+>>>>>>> af239b9 (fixed footer position issue when the content gets short)
