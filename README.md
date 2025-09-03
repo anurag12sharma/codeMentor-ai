@@ -79,7 +79,8 @@ Competitive programming is fun, but tracking everything isn’t..
 ## 📸 Screenshots & GIFs
 
 **🌐 Web Dashboard**
-> <img width="1940" height="3106" alt="image" src="https://github.com/user-attachments/assets/205d5924-4278-4e4c-adbd-6dc942a3a93a" />
+> <img width="2864" height="5328" alt="image" src="https://github.com/user-attachments/assets/d3b25f1c-b9f4-4f61-bcab-e6e5f622f905" />
+
 
 
 **🤖 Bot Screenshots**
