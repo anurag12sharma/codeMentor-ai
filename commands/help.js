@@ -36,12 +36,6 @@ module.exports = {
           inline: false
         },
         {
-          name: "📚 Study Commands",
-          value:
-            "`!schedule` - Get AI study plan\n`!tip` - Get programming tips",
-          inline: false,
-        },
-        {
           name: "🧠 AI-Powered Features",
           value:
             "`!schedule` - Get AI study plan\n" +
