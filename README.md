@@ -177,8 +177,6 @@ graph TB
     A --> D[Descope Auth]
     E[Web Dashboard] --> F[Express Server]
     F --> B
-    F --> G[Database]
-    A --> G
     H[Railway Deployment] --> A
     I[Railway Deployment] --> E
 ```
