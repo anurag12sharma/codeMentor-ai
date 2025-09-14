@@ -1,10 +1,8 @@
-const CodeforcesAPI = require('./codeforcesAPI');
 const CompeteAPIFetcher = require('./codechefScraper'); // Using CompeteAPI now
 const { ContestStatus, ContestPlatform } = require('./contestTypes');
 
 class ContestManager {
     constructor() {
-        this.codeforces = new CodeforcesAPI();
         this.competeAPI = new CompeteAPIFetcher(); // Real contest API
         this.allContests = [];
         this.lastUpdate = null;
@@ -22,41 +20,20 @@ class ContestManager {
         console.log('🔄 Fetching REAL contests from all sources...');
         
         try {
-            // Fetch from both Codeforces API and CompeteAPI concurrently
-            const [codeforcesResult, competeAPIResult] = await Promise.allSettled([
-                this.codeforces.getUpcomingContests(),
+            const [competeAPIResult] = await Promise.allSettled([
                 this.competeAPI.getUpcomingContests()
             ]);
 
             this.allContests = [];
-            
-            // Process Codeforces contests
-            if (codeforcesResult.status === 'fulfilled') {
-                const cfContests = codeforcesResult.value || [];
-                // Only add Codeforces contests that are not duplicated in CompeteAPI
-                this.allContests.push(...cfContests);
-                console.log(`✅ Added ${cfContests.length} contests from Codeforces API`);
-            } else {
-                console.error('❌ Codeforces API failed:', codeforcesResult.reason?.message);
-            }
 
-            // Process CompeteAPI contests
             if (competeAPIResult.status === 'fulfilled') {
                 const competeContests = competeAPIResult.value || [];
-                
-                // Filter out Codeforces contests from CompeteAPI to avoid duplicates
-                const nonCodeforcesContests = competeContests.filter(
-                    contest => contest.platform !== ContestPlatform.CODEFORCES
-                );
-                
-                this.allContests.push(...nonCodeforcesContests);
-                console.log(`✅ Added ${nonCodeforcesContests.length} contests from CompeteAPI`);
+                this.allContests.push(...competeContests);
                 console.log(`📊 CompeteAPI platforms: ${[...new Set(competeContests.map(c => c.platform))].join(', ')}`);
             } else {
                 console.error('❌ CompeteAPI failed:', competeAPIResult.reason?.message);
             }
 
-            // Remove duplicates and sort by start time
             this.allContests = this.removeDuplicates(this.allContests);
             this.allContests.sort((a, b) => a.startTime - b.startTime);
             this.lastUpdate = Date.now();
@@ -75,6 +52,7 @@ class ContestManager {
                 console.log(`📅 Next: ${contest.name} (${contest.platform}) - ${contest.getRelativeTime()}`);
             });
             
+
             return this.allContests;
 
         } catch (error) {

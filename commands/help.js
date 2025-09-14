@@ -24,7 +24,7 @@ module.exports = {
                   '`!remind-on` — Enable contest reminders in this channel\n' +
                   '`!remind-off` — Disable contest reminders for this channel\n' +
                   '`!running` - View currently running contests\n' +
-                  '`!search <level>` - Find contests for your level' +
+                  '`!search <level>` - Find contests for your level\n' +
                   '`!stats` - Get Contests Stats',
           inline: false,
         },

@@ -65,7 +65,14 @@ class CompeteAPIFetcher {
 
                     // Calculate duration in minutes
                     const durationMs = apiContest.duration || 7200000; // Default 2 hours
-                    const durationMinutes = Math.floor(durationMs / 60000);
+                    let durationMinutes;
+                    
+                    if (platform === ContestPlatform.LEETCODE) {
+                        durationMinutes = Math.floor(durationMs / 3600000);
+                    } else {
+                        durationMinutes = Math.floor(durationMs / 60000);
+                    }
+
 
                     // Create contest object
                     const contest = new Contest({
