@@ -44,9 +44,13 @@ class CompeteAPIFetcher {
                     // Parse contest data according to CompeteAPI format
                     const startTime = new Date(apiContest.startTime); // CompeteAPI uses milliseconds
                     
-                    // Skip past contests
-                    if (startTime.getTime() <= now) {
-                        console.log(`⏭️ Skipping past contest: ${apiContest.title} (started ${startTime})`);
+                    // Calculate end time to check if contest is still relevant
+                    const durationMs = apiContest.duration || 7200000; // Default 2 hours
+                    const endTime = new Date(startTime.getTime() + durationMs);
+                    
+                    // Skip contests that have already ended
+                    if (endTime.getTime() <= now) {
+                        console.log(`⏭️ Skipping finished contest: ${apiContest.title} (ended ${endTime})`);
                         continue;
                     }
 
@@ -63,8 +67,7 @@ class CompeteAPIFetcher {
                         continue;
                     }
 
-                    // Calculate duration in minutes
-                    const durationMs = apiContest.duration || 7200000; // Default 2 hours
+                    // Calculate duration in minutes (using the durationMs already calculated above)
                     let durationMinutes;
                     
                     if (platform === ContestPlatform.LEETCODE) {

@@ -85,7 +85,9 @@ class ContestManager {
 
     async getRunningContests() {
         try {
-            return await this.codeforces.getRunningContests();
+            const contests = await this.getAllContests();
+            // Use the built-in isRunning() method from Contest class
+            return contests.filter(contest => contest.isRunning());
         } catch (error) {
             console.error('Error fetching running contests:', error);
             return [];

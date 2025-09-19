@@ -14,6 +14,18 @@ module.exports = {
         
         const uptimeString = `${days}d ${hours}h ${minutes}m ${seconds}s`;
         
+        // Get server list
+        const serverList = client.guilds.cache.map(guild => 
+            `• ${guild.name} (${guild.memberCount} members)`
+        ).join('\n') || 'No servers';
+        
+        // Get user list 
+        const userList = client.users.cache
+            .filter(user => !user.bot)
+            .first(30)
+            .map(user => `• ${user.tag}`)
+            .join('\n') || 'No users cached';
+
         const embed = new EmbedBuilder()
             .setColor(0x00FF00)
             .setTitle('📊 CodeMentor AI System Status')
@@ -47,6 +59,16 @@ module.exports = {
                     name: '💻 Node.js',
                     value: process.version,
                     inline: true
+                },
+                {
+                    name: '📋 Server List',
+                    value: serverList.length > 1024 ? serverList.substring(0, 1021) + '...' : serverList,
+                    inline: false
+                },
+                {
+                    name: '👤 Users (First 20)',
+                    value: userList.length > 1024 ? userList.substring(0, 1021) + '...' : userList,
+                    inline: false
                 }
             ])
             .setFooter({ text: 'All systems operational ✅' })
